@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Cadastro e Login Daniel</title>
+</head>
+<body>
+    <header>
+        <img src="./img/guaxinim.png" alt="">
+        <ul>
+            <li>home</li>
+            <li>sobre</li>
+            <li>contato</li>
+        </ul>
+    </header>
+
+    <form>
+        <h1>cadastro</h1>
+        <label for="nome">nome</label>
+        <input id="nome" type="text">
+        <label for="email">email</label>
+        <input id="email" type="email">
+        <label for="senha">senha</label>
+        <input id="senha" type="password">
+        <button>cadastrar</button>
+    </form>
+
+    <a class="back-index" href="./index.html"><img src="./img/seta-esquerda.png" alt=""></a>
+
+    <script>
+        document.querySelector('form').addEventListener('submit', async (e) => {
+          e.preventDefault();
+        
+          const nome = document.getElementById('nome').value;
+          const email = document.getElementById('email').value;
+          const senha = document.getElementById('senha').value;
+        
+          const resposta = await fetch('https://login-cadastro-jwt-production.up.railway.app/usuarios', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ nome, email, senha })
+          });
+        
+          const dados = await resposta.json();
+        
+          if (resposta.ok) {
+            alert('Cadastro realizado com sucesso!');
+            window.location.href = './index.html'; // redireciona para o login
+          } else {
+            alert('Erro no cadastro: ' + dados.erro);
+          }
+        });
+        </script>
+        
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+    <title>Cadastro e Login Daniel</title>
+</head>
+<body>
+    <header>
+        <img src="./img/guaxinim.png" alt="">
+        <ul>
+           <a class="link-header" href="./index.html"><li>home</li></a> 
+            <a class="link-header" href="#"><li>sobre</li></a>
+            <a class="link-header" href="#"><li>contato</li></a>
+        </ul>
+    </header>
+
+    <form>
+        <h1>logue para ver um video surpresa</h1>
+        <label for="email">email</label>
+        <input id="email" type="email">
+        <label for="senha">senha</label>
+        <input id="senha" type="password">
+        <button>Entrar</button>
+        <a class="cadastro" href="./cadastro.html">cadastre-se</a>
+        <script>
+            document.querySelector('form').addEventListener('submit', async (e) => {
+              e.preventDefault();
+            
+              const email = document.getElementById('email').value;
+              const senha = document.getElementById('senha').value;
+            
+              const resposta = await fetch('https://login-cadastro-jwt-production.up.railway.app/login', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ email, senha })
+              });
+            
+              const dados = await resposta.json();
+            
+              if (resposta.ok) {
+                alert('Login bem-sucedido! Token: ' + dados.token);
+              
+              } else {
+                alert('Erro no login: ' + dados.mensagem);
+              }
+            });
+            </script>
+            
+    </form>
+</body>
+</html>
