@@ -30,31 +30,32 @@
     <a class="back-index" href="./index.html"><img src="./img/seta-esquerda.png" alt=""></a>
 
     <script>
-       document.querySelector('form').addEventListener('submit', async (e) => {
-  e.preventDefault();
-
-  const nome = document.getElementById('nome').value;
-  const email = document.getElementById('email').value;
-  const senha = document.getElementById('senha').value;
-
-  const resposta = await fetch('https://login-cadastro-jwt-production.up.railway.app/usuarios', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ nome, email, senha }),
-  });
-
-  const dados = await resposta.json();
-
-  if (resposta.ok) {
-    alert('Cadastro realizado com sucesso!');
-    window.location.href = './index.html'; // redireciona para o login
-  } else {
-    alert('Erro no cadastro: ' + dados.erro);
-  }
-});
-
+      const API_URL = 'https://login-cadastro-jwt-production.up.railway.app/usuarios';
+    
+      document.querySelector('form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+    
+        const nome = document.getElementById('nome').value;
+        const email = document.getElementById('email').value;
+        const senha = document.getElementById('senha').value;
+    
+        const resposta = await fetch(API_URL, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ nome, email, senha }),
+        });
+    
+        const dados = await resposta.json();
+    
+        if (resposta.ok) {
+          alert('Cadastro realizado com sucesso!');
+          window.location.href = './index.html'; // redireciona para o login
+        } else {
+          alert('Erro no cadastro: ' + dados.erro);
+        }
+      });
     </script>
 </body>
 </html>
