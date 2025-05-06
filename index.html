@@ -49,6 +49,8 @@
                 alert('Erro no login: ' + dados.mensagem);
               }
             });
+            const cors = require('cors');
+app.use(cors({ origin: 'https://front-end-cadastro-login-twj.vercel.app' }));
             </script>
             
     </form>
